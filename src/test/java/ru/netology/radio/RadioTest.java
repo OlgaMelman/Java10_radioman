@@ -7,6 +7,19 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 public class RadioTest {
 
+    Radio radio = new Radio();
+
+    @Test
+    public void changeCountRadio() {
+        Radio radio = new Radio(40);
+        radio.setCurrentNumberRadio(36);
+
+        int expected = 36;
+        int actual = radio.getCurrentNumberRadio();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
     @ParameterizedTest
     @CsvSource({
             "8,9",
@@ -15,7 +28,6 @@ public class RadioTest {
             "1,2"
     })
     public void setNumberNext(int newCurrentNumberRadio, int expected) {
-        Radio radio = new Radio();
         radio.setCurrentNumberRadio(newCurrentNumberRadio);
 
         radio.next();
@@ -33,7 +45,6 @@ public class RadioTest {
             "10,0"
     })
     public void setUnrealNumberRadio(int newCurrentNumberRadio, int expected) {
-        Radio radio = new Radio();
         radio.setCurrentNumberRadio(newCurrentNumberRadio);
 
         int actual = radio.getCurrentNumberRadio();
@@ -49,7 +60,6 @@ public class RadioTest {
             "0,9"
     })
     public void setNumberPrev(int newCurrentNumberRadio, int expected) {
-        Radio radio = new Radio();
         radio.setCurrentNumberRadio(newCurrentNumberRadio);
 
         radio.prev();
@@ -63,7 +73,6 @@ public class RadioTest {
 
     @Test
     public void chooseNumber() {
-        Radio radio = new Radio();
         radio.setCurrentNumberRadio(3);
 
         int expected = 3;
@@ -76,12 +85,11 @@ public class RadioTest {
     @CsvSource({
             "0,1",
             "1,2",
-            "8,9",
-            "9,10",
-            "10,10"
+            "98,99",
+            "99,100",
+            "100,100"
     })
     public void upVolume(int newCurrentVolume, int expected) { // можно параметризированным сделать
-        Radio radio = new Radio();
         radio.setCurrentVolume(newCurrentVolume);
 
         radio.increaseVolume();
@@ -96,11 +104,10 @@ public class RadioTest {
     @CsvSource({
             "0,0",
             "1,0",
-            "10,9",
-            "9,8"
+            "100,99",
+            "99,98"
     })
     public void downVolume(int newCurrentVolume, int expected) { // можно параметризированным сделать
-        Radio radio = new Radio();
         radio.setCurrentVolume(newCurrentVolume);
 
         radio.decreaseVolume();
@@ -115,10 +122,9 @@ public class RadioTest {
     @ParameterizedTest
     @CsvSource({
             "-1,0",
-            "11,0"
+            "102,0"
     })
     public void setUnrealVolume(int newCurrentVolume, int expected) {
-        Radio radio = new Radio();
         radio.setCurrentVolume(newCurrentVolume);
 
         int actual = radio.getCurrentVolume();
